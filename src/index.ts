@@ -1,5 +1,6 @@
-import express, { Response } from 'express';
 import cors from 'cors';
+import express, { Response } from 'express';
+import database from './db';
 
 const app = express();
 
@@ -11,4 +12,8 @@ app.get('/', (_, res: Response) => {
   res.json({ success: true });
 });
 
-app.listen(process.env.PORT || 3333);
+(async () => {
+  await database.sync();
+
+  app.listen(process.env.PORT || 3333);
+})();

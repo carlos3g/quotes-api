@@ -18,6 +18,15 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-console': 'error',
+    'no-console': 1,
+    'import/prefer-default-export': 0,
+    'import/extensions': 0,
+    'import/no-unresolved': 0,
+    '@typescript-eslint/no-floating-promises': [
+      'error',
+      {
+        ignoreIIFE: true,
+      },
+    ],
   },
 };
