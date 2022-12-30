@@ -35,11 +35,6 @@ export const authorController = {
     const { id } = req.params;
     const { name, birthday, deathday } = req.body;
 
-    if (!id) {
-      res.status(400).json({ error: 'URL param missing: id' });
-      return;
-    }
-
     const [rowsUpdated] = await models.author.update({ name, birthday, deathday }, { where: { id } });
 
     if (!rowsUpdated) {
