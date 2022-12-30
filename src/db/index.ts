@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+
 import { databaseConnectionConfig } from '../config/database.config';
 import { applyExtraSetup } from './extra-setup';
 import { authorModelDefiner, quoteModelDefiner } from './models';
@@ -13,4 +14,4 @@ modelDefiners.forEach((modelDefiner) => {
 
 applyExtraSetup(connection);
 
-export default connection;
+export const db = connection;
