@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { FindOptions } from 'sequelize';
 
 import { db } from '../db';
 import { IQuote } from '../interfaces/IQuote.interface';
@@ -24,8 +25,15 @@ export const quoteController = {
     res.status(200).json();
   },
 
-  async index(_: Request, res: Response) {
-    const quotes = await models.quote.findAll();
+  async index(req: Request<undefined, undefined, undefined, { authorId: number }>, res: Response) {
+    const { authorId } = req.query;
+    const queryOptions: FindOptions = {};
+
+    if (authorId) {
+      queryOptions.include = [{ association: 'author', where: { id: authorId } }];
+    }
+
+    const quotes = await models.quote.findAll(queryOptions);
 
     res.status(200).json(quotes);
   },
