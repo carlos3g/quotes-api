@@ -38,7 +38,7 @@ export const quoteController = {
     res.status(200).json(quotes);
   },
 
-  async put(req: Request<Pick<IQuote, 'id'>, undefined, IQuote>, res: Response) {
+  async put(req: Request<Pick<IQuote, 'id'>, undefined, Pick<IQuote, 'body'>>, res: Response) {
     const { id } = req.params;
     const { body } = req.body;
 
