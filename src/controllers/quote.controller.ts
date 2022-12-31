@@ -30,7 +30,7 @@ export const quoteController = {
     const queryOptions: FindOptions = {};
 
     if (authorId) {
-      queryOptions.include = [{ association: 'author', where: { id: authorId } }];
+      queryOptions.where = { authorId };
     }
 
     const quotes = await models.quote.findAll(queryOptions);
