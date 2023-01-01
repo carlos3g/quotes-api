@@ -1,22 +1,72 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express';
 
-import { authorController } from './controllers/author.controller';
-import { quoteController } from './controllers/quote.controller';
+import { authorController, quoteController } from './controllers';
 import * as validators from './validators';
+import * as middlewares from './middlewares';
 
 const routes = express.Router();
 
-routes.post('/author', validators.quote.checkSchema.store, authorController.store.bind(authorController));
-routes.get('/author/:id', validators.quote.checkSchema.show, authorController.show.bind(authorController));
-routes.delete('/author/:id', validators.quote.checkSchema.delete, authorController.delete.bind(authorController));
-routes.put('/author/:id', validators.quote.checkSchema.put, authorController.put.bind(authorController));
-routes.get('/authors', validators.quote.checkSchema.index, authorController.index.bind(authorController));
+routes.post(
+  '/author',
+  validators.quote.checkSchema.store,
+  middlewares.validation,
+  authorController.store.bind(authorController)
+);
+routes.get(
+  '/author/:id',
+  validators.quote.checkSchema.show,
+  middlewares.validation,
+  authorController.show.bind(authorController)
+);
+routes.delete(
+  '/author/:id',
+  validators.quote.checkSchema.delete,
+  middlewares.validation,
+  authorController.delete.bind(authorController)
+);
+routes.put(
+  '/author/:id',
+  validators.quote.checkSchema.put,
+  middlewares.validation,
+  authorController.put.bind(authorController)
+);
+routes.get(
+  '/authors',
+  validators.quote.checkSchema.index,
+  middlewares.validation,
+  authorController.index.bind(authorController)
+);
 
-routes.post('/quote', validators.quote.checkSchema.store, quoteController.store.bind(quoteController));
-routes.get('/quote/:id', validators.quote.checkSchema.show, quoteController.show.bind(quoteController));
-routes.delete('/quote/:id', validators.quote.checkSchema.delete, quoteController.delete.bind(quoteController));
-routes.put('/quote/:id', validators.quote.checkSchema.put, quoteController.put.bind(quoteController));
-routes.get('/quotes', validators.quote.checkSchema.index, quoteController.index.bind(quoteController));
+routes.post(
+  '/quote',
+  validators.quote.checkSchema.store,
+  middlewares.validation,
+  quoteController.store.bind(quoteController)
+);
+routes.get(
+  '/quote/:id',
+  validators.quote.checkSchema.show,
+  middlewares.validation,
+  quoteController.show.bind(quoteController)
+);
+routes.delete(
+  '/quote/:id',
+  validators.quote.checkSchema.delete,
+  middlewares.validation,
+  quoteController.delete.bind(quoteController)
+);
+routes.put(
+  '/quote/:id',
+  validators.quote.checkSchema.put,
+  middlewares.validation,
+  quoteController.put.bind(quoteController)
+);
+routes.get(
+  '/quotes',
+  validators.quote.checkSchema.index,
+  middlewares.validation,
+  quoteController.index.bind(quoteController)
+);
 
 export { routes };

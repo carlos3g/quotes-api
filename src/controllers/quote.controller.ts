@@ -10,11 +10,6 @@ export const quoteController = {
   async delete(req: Request<Pick<IQuote, 'id'>>, res: Response) {
     const { id } = req.params;
 
-    if (!id) {
-      res.status(400).json({ error: 'URL param missing: id' });
-      return;
-    }
-
     const rowsDeleted = await models.quote.destroy({ where: { id } });
 
     if (!rowsDeleted) {
@@ -67,16 +62,6 @@ export const quoteController = {
 
   async store(req: Request<undefined, undefined, IQuote>, res: Response) {
     const { body, authorId } = req.body;
-
-    if (!authorId) {
-      res.status(400).json({ error: 'Body params missing: authorId' });
-      return;
-    }
-
-    if (!body) {
-      res.status(400).json({ error: 'Body params missing: body' });
-      return;
-    }
 
     const quote = await models.quote.create({ body, authorId });
 

@@ -2,18 +2,13 @@ import { Request, Response } from 'express';
 
 import { db } from '../db';
 import { IAuthor } from '../interfaces/IAuthor.interface';
-import * as utils from '../utils';
+import { slugify } from '../utils';
 
 const { models } = db;
 
 export const authorController = {
   async delete(req: Request<Pick<IAuthor, 'id'>>, res: Response) {
     const { id } = req.params;
-
-    if (!id) {
-      res.status(400).json({ error: 'URL param missing: id' });
-      return;
-    }
 
     const rowsDeleted = await models.author.destroy({ where: { id } });
 
@@ -61,14 +56,9 @@ export const authorController = {
   async store(req: Request<undefined, undefined, IAuthor>, res: Response) {
     const { name, birthday, deathday } = req.body;
 
-    if (!name) {
-      res.status(400).json({ error: 'Body params missing: name' });
-      return;
-    }
-
     const author = await models.author.create({
       name,
-      slug: utils.slugify(name),
+      slug: slugify(name),
       birthday: birthday ?? null,
       deathday: deathday ?? null,
     });

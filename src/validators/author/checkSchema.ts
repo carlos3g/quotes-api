@@ -29,10 +29,12 @@ const put = expressValidator.checkSchema({
   birthday: {
     in: 'body',
     isDate: { options: { strictMode: true } },
+    optional: true,
   },
   deathday: {
     in: 'body',
     isDate: { options: { strictMode: true } },
+    optional: true,
   },
 });
 
@@ -60,10 +62,12 @@ const store = expressValidator.checkSchema({
   birthday: {
     in: 'body',
     isDate: { options: { strictMode: true } },
+    optional: true,
   },
   deathday: {
     in: 'body',
     isDate: { options: { strictMode: true } },
+    optional: true,
   },
 });
 

@@ -12,6 +12,7 @@ const index = expressValidator.checkSchema({
   authorId: {
     in: 'query',
     isNumeric: true,
+    optional: true,
   },
 });
 
