@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "yarn build && node ./dist/index.js",
-    "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/index.ts",
+    "start:dev": "ts-node-dev --transpile-only --inspect --ignore-watch node_modules src/index.ts",
     "prepare": "husky install"
   },
   "devDependencies": {
