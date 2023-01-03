@@ -9,34 +9,29 @@ const routes = express.Router();
 
 routes.post(
   '/author',
-  validators.quote.checkSchema.store,
+  validators.author.checkSchema.store,
   middlewares.validation,
   authorController.store.bind(authorController)
 );
 routes.get(
   '/author/:id',
-  validators.quote.checkSchema.show,
+  validators.author.checkSchema.show,
   middlewares.validation,
   authorController.show.bind(authorController)
 );
 routes.delete(
   '/author/:id',
-  validators.quote.checkSchema.delete,
+  validators.author.checkSchema.delete,
   middlewares.validation,
   authorController.delete.bind(authorController)
 );
 routes.put(
   '/author/:id',
-  validators.quote.checkSchema.put,
+  validators.author.checkSchema.put,
   middlewares.validation,
   authorController.put.bind(authorController)
 );
-routes.get(
-  '/authors',
-  validators.quote.checkSchema.index,
-  middlewares.validation,
-  authorController.index.bind(authorController)
-);
+routes.get('/authors', middlewares.validation, authorController.index.bind(authorController));
 
 routes.post(
   '/quote',
