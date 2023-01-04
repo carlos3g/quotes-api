@@ -22,6 +22,8 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/extensions': 0,
     'import/no-unresolved': 0,
+    'no-void': 0,
+    'class-methods-use-this': 0,
     '@typescript-eslint/no-floating-promises': [
       'error',
       {
