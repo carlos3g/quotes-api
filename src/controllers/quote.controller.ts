@@ -21,18 +21,7 @@ const quoteController = {
   async index(req: Request<undefined, undefined, undefined, { authorId: number }>, res: Response) {
     const { authorId } = req.query;
 
-    let author;
-
-    if (authorId) {
-      author = await dataSource.manager.findOneBy(Author, { id: authorId });
-
-      if (!author) {
-        res.status(404).json({ errors: 'Author not found.' });
-        return;
-      }
-    }
-
-    const quotes = await dataSource.manager.findBy(Quote, { author });
+    const quotes = await dataSource.manager.findBy(Quote, { author_id: authorId });
 
     res.status(200).json(quotes);
   },
