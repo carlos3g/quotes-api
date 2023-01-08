@@ -43,11 +43,14 @@ This is a rest api for quotes. Here you can do CRUD operations and filtering wit
 ### With docker
 
 ```bash
-# Runs application:
+# Runs app:
 docker-compose up -d
 
 # Runs migrations:
-yarn typeorm migration:run -d ./src/database/index.ts
+yarn db:migrations
+
+# Runs seeders:
+yarn db:seeders
 ```
 
 ### Without docker
@@ -56,11 +59,14 @@ yarn typeorm migration:run -d ./src/database/index.ts
 # Installs dependencies:
 yarn install
 
-# Runs application:
-yarn start:dev
+# Build and run app:
+yarn build:start
 
 # Runs migrations:
-yarn typeorm migration:run -d ./src/database/index.ts
+yarn db:migrations
+
+# Runs seeders:
+yarn db:seeders
 ```
 
 ## 🛠 Technologies
@@ -68,6 +74,7 @@ yarn typeorm migration:run -d ./src/database/index.ts
 - API rest with `express`
 - Validate requests with `express-validator`
 - Handling database with `typeorm`
+- Migrations and seeders
 - Using `dotenv` for sensive keys
 
 ## 🤝 How to contribute

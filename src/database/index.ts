@@ -1,12 +1,14 @@
-import { DataSource } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { SeederOptions } from 'typeorm-extension';
 
-import * as entities from '../entities';
-
-const dataSource = new DataSource({
+const dataSourceOptions: DataSourceOptions & SeederOptions = {
   type: 'sqlite',
-  database: './src/database/database.sqlite',
-  entities,
-  migrations: ['./src/migrations/*.ts'],
-});
+  database: './dist/database/database.sqlite',
+  entities: ['./dist/entities/*.entity.js'],
+  migrations: ['./dist/database/migrations/*.js'],
+  seeds: ['./dist/database/seeds/*.seed.js'],
+};
+
+const dataSource = new DataSource(dataSourceOptions as DataSourceOptions);
 
 export { dataSource };
