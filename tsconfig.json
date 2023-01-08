@@ -11,6 +11,9 @@
 
     "outDir": "dist",
     "removeComments": true,
+    "paths": {
+      "~/*": ["./src/*"]
+    },
 
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

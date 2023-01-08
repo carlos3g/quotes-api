@@ -1,7 +1,7 @@
 export interface IQuote {
   id: number;
   body: string;
-  authorId: number;
+  author_id: number;
   createdAt: string;
   updatedAt: string;
 }

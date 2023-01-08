@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 
-import { validatorErrorsFormatter } from '../utils';
+import { validatorErrorsFormatter } from '~/utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const validation: RequestHandler<any, any, any, any, any> = (req, res, next) => {

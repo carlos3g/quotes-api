@@ -4,8 +4,8 @@ import 'reflect-metadata';
 import cors from 'cors';
 import express from 'express';
 
+import { dataSource } from '~/database';
 import { routes } from './routes';
-import { dataSource } from './database';
 
 const app = express();
 

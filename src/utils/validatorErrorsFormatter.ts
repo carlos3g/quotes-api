@@ -1,8 +1,8 @@
 import { ValidationError } from 'express-validator';
 
-import { ICustomErrorObjectFormat } from '../interfaces';
+import { ICustomErrorObjectFormat } from '~/interfaces';
 
-const validatorErrorsFormatter = (errors: ValidationError[]) => {
+const validatorErrorsFormatter = (errors: ValidationError[] = []) => {
   const objectFormated: ICustomErrorObjectFormat = { errors: {} };
 
   errors.forEach((error) => {

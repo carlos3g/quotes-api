@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express';
 
-import { authorController, quoteController } from './controllers';
-import * as validators from './validators';
-import * as middlewares from './middlewares';
+import { authorController, quoteController } from '~/controllers';
+import * as validators from '~/validators';
+import * as middlewares from '~/middlewares';
 
 const routes = express.Router();
 

@@ -7,10 +7,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsc && tsc-alias",
     "build:start": "yarn build && node ./dist/index.js",
     "start": "node ./dist/index.js",
-    "start:dev": "ts-node-dev --transpile-only --inspect --ignore-watch node_modules src/index.ts",
+    "start:dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --inspect --ignore-watch node_modules src/index.ts",
     "typeorm:dev": "typeorm-ts-node-esm -d ./src/database/index.ts",
     "typeorm-extension:dev": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js -d ./src/database/index.ts",
     "db:migrations": "yarn typeorm migration:run -d ./dist/database/index.js",
@@ -38,6 +38,8 @@
     "prettier": "^2.8.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.8.2",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.4"
   },
   "dependencies": {

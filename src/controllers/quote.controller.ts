@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { dataSource } from '../database';
-import { IQuote } from '../interfaces/IQuote.interface';
-import { Author, Quote } from '../entities';
+import { dataSource } from '~/database';
+import { IQuote } from '~/interfaces';
+import { Author, Quote } from '~/entities';
 
 const quoteController = {
   async delete(req: Request<Pick<IQuote, 'id'>>, res: Response) {
@@ -37,8 +37,7 @@ const quoteController = {
       return;
     }
 
-    quote.body = body;
-    await dataSource.manager.save(quote);
+    await dataSource.manager.update(Quote, { id }, { body });
 
     res.status(200).json();
   },
@@ -57,7 +56,7 @@ const quoteController = {
   },
 
   async store(req: Request<undefined, undefined, IQuote>, res: Response) {
-    const { body, authorId } = req.body;
+    const { body, author_id: authorId } = req.body;
 
     const author = await dataSource.manager.findOneBy(Author, { id: authorId });
 

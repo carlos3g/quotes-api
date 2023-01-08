@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
-import { dataSource } from '../database';
-import { IAuthor } from '../interfaces/IAuthor.interface';
-import { slugify } from '../utils';
-import { Author } from '../entities';
+import { dataSource } from '~/database';
+import { IAuthor } from '~/interfaces';
+import { slugify } from '~/utils';
+import { Author } from '~/entities';
 
 const authorController = {
   async delete(req: Request<Pick<IAuthor, 'id'>>, res: Response) {
@@ -36,16 +36,7 @@ const authorController = {
       return;
     }
 
-    author.name = name;
-    if (birthday) {
-      author.birthday = birthday;
-    }
-
-    if (deathday) {
-      author.deathday = deathday;
-    }
-
-    await dataSource.manager.save(author);
+    await dataSource.manager.update(Author, { id }, { name, birthday, deathday });
 
     res.status(200).json();
   },

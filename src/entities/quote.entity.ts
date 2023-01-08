@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
-import { Author } from './author.entity';
+import { Author } from '~/entities';
 
 @Entity('quotes')
 class Quote {
