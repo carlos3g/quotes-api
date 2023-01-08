@@ -27,6 +27,7 @@ This is a rest api for quotes. Here you can do CRUD operations and filtering wit
   - [With docker](#with-docker)
   - [Without docker](#without-docker)
 - [Technologies](#-technologies)
+- [Documentation](#-documentation)
 - [How to contribute](#-how-to-contribute)
 - [License](#-license)
 
@@ -75,7 +76,13 @@ yarn db:seeders
 - Validate requests with `express-validator`
 - Handling database with `typeorm`
 - Migrations and seeders
+- Documentation made with `swagger`
 - Using `dotenv` for sensive keys
+
+## 📝 Documentation
+
+> Docs were made using swagger.
+> Documentation is served at route `/api-docs`. So just run the app and check it!
 
 ## 🤝 How to contribute
 

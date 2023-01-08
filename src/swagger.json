@@ -1,0 +1,372 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "quotes-api",
+    "description": "This is a rest api for quotes. Here you can do CRUD operations and filtering with quotes and author entities.",
+    "contact": {
+      "name": "Carlos Mesquita",
+      "url": "https://carlos3g.github.io",
+      "email": "carlosmesquita156@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/carlos3g/quotes-api/blob/main/LICENSE"
+    },
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333",
+      "description": "API for tests"
+    }
+  ],
+  "paths": {
+    "/author": {
+      "post": {
+        "summary": "Creates an author.",
+        "description": "Creates an author.",
+        "tags": ["Authors"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Author"
+              },
+              "examples": {
+                "author": {
+                  "name": "Lord Byron",
+                  "birthday": "1757/11/28",
+                  "deathday": "1824/04/19"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/author/{id}": {
+      "get": {
+        "summary": "Gets an author.",
+        "description": "Gets an author.",
+        "tags": ["Authors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Author's id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates an author.",
+        "description": "Updates an author.",
+        "tags": ["Authors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Author's id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Author"
+              },
+              "examples": {
+                "author": {
+                  "name": "Lord Byron",
+                  "birthday": "1757/11/28",
+                  "deathday": "1824/04/19"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes an author.",
+        "description": "Deletes an author.",
+        "tags": ["Authors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Author's id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/authors": {
+      "post": {
+        "summary": "List authors.",
+        "description": "List authors.",
+        "tags": ["Authors"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Author"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote": {
+      "post": {
+        "summary": "Creates an quote.",
+        "description": "Creates an quote.",
+        "tags": ["Quotes"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Quote"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/quote/{id}": {
+      "get": {
+        "summary": "Gets an quote.",
+        "description": "Gets an quote.",
+        "tags": ["Quotes"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Quote's id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates an quote.",
+        "description": "Updates an quote.",
+        "tags": ["Quotes"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Quote's id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Quote"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes an quote.",
+        "description": "Deletes an quote.",
+        "tags": ["Quotes"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Quote's id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/quotes": {
+      "post": {
+        "summary": "List quotes.",
+        "description": "List quotes.",
+        "tags": ["Quotes"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Quote"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Author": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date"
+          },
+          "deathday": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": ["name"]
+      },
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string"
+          },
+          "author_id": {
+            "type": "integer"
+          }
+        },
+        "required": ["body", "author_id"]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Authors",
+      "description": "Author related"
+    },
+    {
+      "name": "Quotes",
+      "description": "Quote related"
+    }
+  ]
+}
