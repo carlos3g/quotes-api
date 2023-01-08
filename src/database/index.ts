@@ -6,7 +6,7 @@ const dataSource = new DataSource({
   type: 'sqlite',
   database: './src/database/database.sqlite',
   entities,
-  migrations: ['./src/database/migrations/*.ts'],
+  migrations: ['./src/migrations/*.ts'],
 });
 
 export { dataSource };
