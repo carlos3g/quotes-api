@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 
 import { dataSource } from '~/database';
-import { IQuote } from '~/interfaces';
 import { Author, Quote } from '~/entities';
+import { AppError } from '~/errors/AppError';
+import { IQuote } from '~/interfaces';
 
 const quoteController = {
   async delete(req: Request<Pick<IQuote, 'id'>>, res: Response) {
@@ -11,8 +12,7 @@ const quoteController = {
     const { affected } = await dataSource.manager.delete(Quote, { id });
 
     if (!affected) {
-      res.status(404).json({ errors: 'Quote not found.' });
-      return;
+      throw new AppError('Quote not found.', 404);
     }
 
     res.status(200).json();
@@ -33,8 +33,7 @@ const quoteController = {
     const quote = await dataSource.manager.findOneBy(Quote, { id });
 
     if (!quote) {
-      res.status(404).json({ errors: 'Quote not found.' });
-      return;
+      throw new AppError('Quote not found.', 404);
     }
 
     await dataSource.manager.update(Quote, { id }, { body });
@@ -48,8 +47,7 @@ const quoteController = {
     const quote = await dataSource.manager.findOneBy(Quote, { id });
 
     if (!quote) {
-      res.status(404).json({ errors: 'Quote not found.' });
-      return;
+      throw new AppError('Quote not found.', 404);
     }
 
     res.status(200).json(quote);
@@ -61,8 +59,7 @@ const quoteController = {
     const author = await dataSource.manager.findOneBy(Author, { id: authorId });
 
     if (!author) {
-      res.status(404).json({ errors: 'Author not found.' });
-      return;
+      throw new AppError('Author not found.', 404);
     }
 
     const quote = dataSource.manager.create(Quote, { body, author });

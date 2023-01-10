@@ -24,6 +24,12 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-void': 0,
     'class-methods-use-this': 0,
+    '@typescript-eslint/no-unused-vars': [
+      0,
+      {
+        varsIgnorePattern: '_',
+      },
+    ],
     '@typescript-eslint/no-floating-promises': [
       'error',
       {

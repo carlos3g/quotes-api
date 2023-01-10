@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 
 import { dataSource } from '~/database';
+import { Author } from '~/entities';
+import { AppError } from '~/errors/AppError';
 import { IAuthor } from '~/interfaces';
 import { slugify } from '~/utils';
-import { Author } from '~/entities';
 
 const authorController = {
   async delete(req: Request<Pick<IAuthor, 'id'>>, res: Response) {
@@ -12,8 +13,7 @@ const authorController = {
     const { affected } = await dataSource.manager.delete(Author, { id });
 
     if (!affected) {
-      res.status(404).json({ errors: 'Author not found.' });
-      return;
+      throw new AppError('Author not found.', 404);
     }
 
     res.status(200).json();
@@ -32,8 +32,7 @@ const authorController = {
     const author = await dataSource.manager.findOneBy(Author, { id });
 
     if (!author) {
-      res.status(404).json({ errors: 'Author not found.' });
-      return;
+      throw new AppError('Author not found.', 404);
     }
 
     await dataSource.manager.update(Author, { id }, { name, birthday, deathday });
@@ -47,8 +46,7 @@ const authorController = {
     const author = await dataSource.manager.findOneBy(Author, { id });
 
     if (!author) {
-      res.status(404).json({ errors: 'Author not found.' });
-      return;
+      throw new AppError('Author not found.', 404);
     }
 
     res.status(200).json(author);
