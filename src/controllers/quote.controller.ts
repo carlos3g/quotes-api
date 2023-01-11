@@ -1,17 +1,20 @@
 import { Request, Response } from 'express';
 
-import { dataSource } from '~/database';
-import { Author, Quote } from '~/entities';
+import { Quote } from '~/entities';
 import { AppError } from '~/errors/AppError';
+import { AuthorRepository, QuoteRepository } from '~/repositories';
+
+const authorRepository = new AuthorRepository();
+const quoteRepository = new QuoteRepository();
 
 const quoteController = {
   async delete(req: Request<Pick<Quote, 'id'>>, res: Response) {
     const { id } = req.params;
 
-    const { affected } = await dataSource.manager.delete(Quote, { id });
+    const hasDeleted = await quoteRepository.deleteOne(id);
 
-    if (!affected) {
-      throw new AppError('Quote not found.', 404);
+    if (!hasDeleted) {
+      throw new AppError('Quote id invalid.', 404);
     }
 
     res.status(200).json();
@@ -20,22 +23,19 @@ const quoteController = {
   async index(req: Request<undefined, undefined, undefined, { authorId: number }>, res: Response) {
     const { authorId } = req.query;
 
-    const quotes = await dataSource.manager.findBy(Quote, { author_id: authorId });
+    const quotes = await quoteRepository.findAllBy({ author_id: authorId });
 
     res.status(200).json(quotes);
   },
 
   async put(req: Request<Pick<Quote, 'id'>, undefined, Pick<Quote, 'body'>>, res: Response) {
     const { id } = req.params;
-    const { body } = req.body;
 
-    const quote = await dataSource.manager.findOneBy(Quote, { id });
+    const hasUpdated = await quoteRepository.updateOne(id, req.body);
 
-    if (!quote) {
-      throw new AppError('Quote not found.', 404);
+    if (!hasUpdated) {
+      throw new AppError('Quote id invalid.', 404);
     }
-
-    await dataSource.manager.update(Quote, { id }, { body });
 
     res.status(200).json();
   },
@@ -43,7 +43,7 @@ const quoteController = {
   async show(req: Request<Pick<Quote, 'id'>>, res: Response) {
     const { id } = req.params;
 
-    const quote = await dataSource.manager.findOneBy(Quote, { id });
+    const quote = await quoteRepository.findOne(id);
 
     if (!quote) {
       throw new AppError('Quote not found.', 404);
@@ -53,16 +53,15 @@ const quoteController = {
   },
 
   async store(req: Request<undefined, undefined, Quote>, res: Response) {
-    const { body, author_id: authorId } = req.body;
+    const { author_id: authorId } = req.body;
 
-    const author = await dataSource.manager.findOneBy(Author, { id: authorId });
+    const author = await authorRepository.findOne(authorId);
 
     if (!author) {
       throw new AppError('Author not found.', 404);
     }
 
-    const quote = dataSource.manager.create(Quote, { body, author });
-    await dataSource.manager.save(quote);
+    const quote = await quoteRepository.create(req.body);
 
     res.status(201).json(quote);
   },
