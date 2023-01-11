@@ -3,11 +3,10 @@ import { Request, Response } from 'express';
 import { dataSource } from '~/database';
 import { Author } from '~/entities';
 import { AppError } from '~/errors/AppError';
-import { IAuthor } from '~/interfaces';
 import { slugify } from '~/utils';
 
 const authorController = {
-  async delete(req: Request<Pick<IAuthor, 'id'>>, res: Response) {
+  async delete(req: Request<Pick<Author, 'id'>>, res: Response) {
     const { id } = req.params;
 
     const { affected } = await dataSource.manager.delete(Author, { id });
@@ -25,7 +24,7 @@ const authorController = {
     res.status(200).json(authors);
   },
 
-  async put(req: Request<Pick<IAuthor, 'id'>, undefined, IAuthor>, res: Response) {
+  async put(req: Request<Pick<Author, 'id'>, undefined, Author>, res: Response) {
     const { id } = req.params;
     const { name, birthday, deathday } = req.body;
 
@@ -40,7 +39,7 @@ const authorController = {
     res.status(200).json();
   },
 
-  async show(req: Request<Pick<IAuthor, 'id'>>, res: Response) {
+  async show(req: Request<Pick<Author, 'id'>>, res: Response) {
     const { id } = req.params;
 
     const author = await dataSource.manager.findOneBy(Author, { id });
@@ -52,7 +51,7 @@ const authorController = {
     res.status(200).json(author);
   },
 
-  async store(req: Request<undefined, undefined, IAuthor>, res: Response) {
+  async store(req: Request<undefined, undefined, Author>, res: Response) {
     const { name, birthday, deathday } = req.body;
 
     const author = dataSource.manager.create(Author, {

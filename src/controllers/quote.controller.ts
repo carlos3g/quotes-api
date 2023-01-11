@@ -3,10 +3,9 @@ import { Request, Response } from 'express';
 import { dataSource } from '~/database';
 import { Author, Quote } from '~/entities';
 import { AppError } from '~/errors/AppError';
-import { IQuote } from '~/interfaces';
 
 const quoteController = {
-  async delete(req: Request<Pick<IQuote, 'id'>>, res: Response) {
+  async delete(req: Request<Pick<Quote, 'id'>>, res: Response) {
     const { id } = req.params;
 
     const { affected } = await dataSource.manager.delete(Quote, { id });
@@ -26,7 +25,7 @@ const quoteController = {
     res.status(200).json(quotes);
   },
 
-  async put(req: Request<Pick<IQuote, 'id'>, undefined, Pick<IQuote, 'body'>>, res: Response) {
+  async put(req: Request<Pick<Quote, 'id'>, undefined, Pick<Quote, 'body'>>, res: Response) {
     const { id } = req.params;
     const { body } = req.body;
 
@@ -41,7 +40,7 @@ const quoteController = {
     res.status(200).json();
   },
 
-  async show(req: Request<Pick<IQuote, 'id'>>, res: Response) {
+  async show(req: Request<Pick<Quote, 'id'>>, res: Response) {
     const { id } = req.params;
 
     const quote = await dataSource.manager.findOneBy(Quote, { id });
@@ -53,7 +52,7 @@ const quoteController = {
     res.status(200).json(quote);
   },
 
-  async store(req: Request<undefined, undefined, IQuote>, res: Response) {
+  async store(req: Request<undefined, undefined, Quote>, res: Response) {
     const { body, author_id: authorId } = req.body;
 
     const author = await dataSource.manager.findOneBy(Author, { id: authorId });
