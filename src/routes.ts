@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express';
 
-import { authorController, quoteController } from '~/controllers';
+import { authorController, quoteController, userController } from '~/controllers';
 import * as validators from '~/validators';
 import * as middlewares from '~/middlewares';
 
@@ -32,6 +32,31 @@ routes.put(
   authorController.put.bind(authorController)
 );
 routes.get('/authors', middlewares.validation, authorController.index.bind(authorController));
+
+routes.post(
+  '/user',
+  validators.user.checkSchema.store,
+  middlewares.validation,
+  userController.store.bind(userController)
+);
+routes.get(
+  '/user/:id',
+  validators.user.checkSchema.show,
+  middlewares.validation,
+  userController.show.bind(userController)
+);
+routes.delete(
+  '/user/:id',
+  validators.user.checkSchema.delete,
+  middlewares.validation,
+  userController.delete.bind(userController)
+);
+routes.put(
+  '/user/:id',
+  validators.user.checkSchema.put,
+  middlewares.validation,
+  userController.put.bind(userController)
+);
 
 routes.post(
   '/quote',
