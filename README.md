@@ -43,15 +43,17 @@ This is a rest api for quotes. Here you can do CRUD operations and filtering wit
 
 ### With docker
 
+> This is a development Dockerfile.
+
 ```bash
-# Runs app:
+# Runs app (dev):
 docker-compose up -d
 
-# Runs migrations:
-yarn db:migrations
+# Runs migrations (exec this only once):
+docker exec quotes-api yarn db:dev:migrations
 
-# Runs seeders:
-yarn db:seeders
+# Runs seeders (exec this only once):
+docker exec quotes-api yarn db:dev:seeders
 ```
 
 ### Without docker
@@ -60,14 +62,14 @@ yarn db:seeders
 # Installs dependencies:
 yarn install
 
-# Build and run app:
-yarn build:start
+# Runs app (dev):
+yarn dev:start
 
 # Runs migrations:
-yarn db:migrations
+yarn db:dev:migrations
 
 # Runs seeders:
-yarn db:seeders
+yarn db:dev:seeders
 ```
 
 ## 🛠 Technologies
@@ -82,7 +84,8 @@ yarn db:seeders
 ## 📝 Documentation
 
 > Docs were made using swagger.
-> Documentation is served at route `/api-docs`. So just run the app and check it!
+
+Documentation is served at route `/api-docs`. So just run the app and check it!
 
 ## 🤝 How to contribute
 
