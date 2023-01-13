@@ -7,6 +7,8 @@ interface IUserRepository {
 
   findOne: (id: User['id']) => Promise<User | null>;
 
+  findOneBy: (criteria: Partial<Omit<User, 'id'>>) => Promise<User | null>;
+
   findAll: () => Promise<User[]>;
 
   findAllBy: (criteria: Partial<Omit<User, 'id'>>) => Promise<User[]>;

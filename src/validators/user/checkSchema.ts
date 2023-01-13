@@ -1,22 +1,8 @@
 import * as expressValidator from 'express-validator';
 
-const deletee = expressValidator.checkSchema({
-  id: {
-    in: 'params',
-    exists: true,
-    isNumeric: true,
-  },
-});
-
 const put = expressValidator.checkSchema({
-  id: {
-    in: 'params',
-    exists: true,
-    isNumeric: true,
-  },
   name: {
     in: 'body',
-    exists: true,
     isString: true,
     isLength: {
       options: {
@@ -28,19 +14,19 @@ const put = expressValidator.checkSchema({
   },
   email: {
     in: 'body',
-    exists: true,
+    optional: true,
     isEmail: true,
   },
   password: {
     in: 'body',
-    exists: true,
+    optional: true,
     isString: true,
     isLength: {
       options: {
         min: 8,
         max: 30,
       },
-      errorMessage: 'name must be between 3 and 30 characters.',
+      errorMessage: 'name must be between 8 and 30 characters.',
     },
   },
 });
@@ -85,4 +71,4 @@ const store = expressValidator.checkSchema({
   },
 });
 
-export const checkSchema = { delete: deletee, put, show, store };
+export const checkSchema = { put, show, store };

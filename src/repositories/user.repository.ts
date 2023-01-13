@@ -35,6 +35,12 @@ class UserRepository implements IUserRepository {
     return user;
   }
 
+  public async findOneBy(criteria: Partial<Omit<User, 'id'>>): Promise<User | null> {
+    const user = await this.userTypeormRepository.findOneBy(criteria);
+
+    return user;
+  }
+
   public async findAll(): Promise<User[]> {
     const users = await this.userTypeormRepository.find();
 

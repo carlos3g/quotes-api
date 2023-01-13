@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express';
 
-import { authorController, quoteController, userController } from '~/controllers';
+import { authorController, quoteController, userController, sessionController } from '~/controllers';
 import * as validators from '~/validators';
 import * as middlewares from '~/middlewares';
 
 const routes = express.Router();
+
+routes.post('/auth/login', validators.login, middlewares.validation, sessionController.store.bind(sessionController));
 
 routes.post(
   '/author',
@@ -46,13 +48,14 @@ routes.get(
   userController.show.bind(userController)
 );
 routes.delete(
-  '/user/:id',
-  validators.user.checkSchema.delete,
+  '/user',
+  middlewares.ensureAuthentication,
   middlewares.validation,
   userController.delete.bind(userController)
 );
 routes.put(
-  '/user/:id',
+  '/user',
+  middlewares.ensureAuthentication,
   validators.user.checkSchema.put,
   middlewares.validation,
   userController.put.bind(userController)

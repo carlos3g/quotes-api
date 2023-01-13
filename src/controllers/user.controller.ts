@@ -8,8 +8,8 @@ import { UserRepository } from '~/repositories';
 const userRepository = new UserRepository();
 
 const userController = {
-  async delete(req: Request<Pick<User, 'id'>>, res: Response) {
-    const { id } = req.params;
+  async delete(req: Request, res: Response) {
+    const { id } = req.user;
 
     const hasDeleted = await userRepository.deleteOne(id);
 
@@ -20,8 +20,8 @@ const userController = {
     res.status(200).json();
   },
 
-  async put(req: Request<Pick<User, 'id'>, undefined, Omit<User, 'id' | 'slug'>>, res: Response) {
-    const { id } = req.params;
+  async put(req: Request<undefined, undefined, Omit<User, 'id' | 'slug'>>, res: Response) {
+    const { id } = req.user;
 
     const hadUpdated = await userRepository.updateOne(id, req.body);
 
@@ -41,7 +41,9 @@ const userController = {
       throw new AppError('User not found.', 404);
     }
 
-    res.status(200).json(user);
+    const { password: _, ...userWithoutPassword } = user;
+
+    res.status(200).json(userWithoutPassword);
   },
 
   async store(req: Request<undefined, undefined, Omit<User, 'id' | 'slug'>>, res: Response) {
