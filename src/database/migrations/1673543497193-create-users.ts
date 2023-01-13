@@ -56,15 +56,17 @@ export class createUsers1673543497193 implements MigrationInterface {
         foreignKeys: [
           {
             name: 'user',
-            referencedTableName: 'authors',
+            referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['usersId'],
+            onDelete: 'cascade',
           },
           {
             name: 'quote',
-            referencedTableName: 'authors',
+            referencedTableName: 'quotes',
             referencedColumnNames: ['id'],
             columnNames: ['quotesId'],
+            onDelete: 'cascade',
           },
         ],
       })

@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express';
 
-import { authorController, quoteController, userController, sessionController } from '~/controllers';
+import {
+  authorController,
+  quoteController,
+  userController,
+  sessionController,
+  favoriteController,
+} from '~/controllers';
 import * as validators from '~/validators';
 import * as middlewares from '~/middlewares';
 
@@ -84,6 +90,12 @@ routes.put(
   validators.quote.checkSchema.put,
   middlewares.validation,
   quoteController.put.bind(quoteController)
+);
+routes.post(
+  '/quote/:id/favorite',
+  middlewares.ensureAuthentication,
+  middlewares.validation,
+  favoriteController.store.bind(favoriteController)
 );
 routes.get(
   '/quotes',

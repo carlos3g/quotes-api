@@ -3,7 +3,10 @@ import { Repository } from 'typeorm';
 import { dataSource } from '~/database';
 import { User } from '~/entities';
 import { IUserRepository } from '~/interfaces';
+import { QuoteRepository } from '~/repositories';
 import { slugify } from '~/utils';
+
+const quoteRepository = new QuoteRepository();
 
 class UserRepository implements IUserRepository {
   public userTypeormRepository: Repository<User>;
@@ -57,6 +60,24 @@ class UserRepository implements IUserRepository {
     const { affected } = await this.userTypeormRepository.update({ id }, columnsToUpdate);
 
     return !!affected;
+  }
+
+  public async addFavorite(userId: number, quoteId: number): Promise<boolean> {
+    const quote = await quoteRepository.findOne(quoteId);
+    const user = await this.userTypeormRepository.findOne({
+      where: { id: userId },
+      relations: { favorite_quotes: true },
+    });
+
+    if (!user || !quote) {
+      return false;
+    }
+
+    user.favorite_quotes.push(quote);
+
+    await this.userTypeormRepository.save(user);
+
+    return true;
   }
 }
 
