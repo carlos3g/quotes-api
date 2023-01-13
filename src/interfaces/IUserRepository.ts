@@ -1,4 +1,4 @@
-import { User } from '~/entities';
+import { Quote, User } from '~/entities';
 
 interface IUserRepository {
   create(data: Omit<User, 'id' | 'slug'>): Promise<User>;
@@ -16,6 +16,10 @@ interface IUserRepository {
   updateOne(id: User['id'], columnsToUpdate: Partial<Omit<User, 'id' | 'slug'>>): Promise<boolean>;
 
   addFavorite(userId: number, quoteId: number): Promise<boolean>;
+
+  removeFavorite(userId: number, quoteId: number): Promise<boolean>;
+
+  getFavoriteQuotes(userId: number): Promise<Quote[] | null>;
 }
 
 export { IUserRepository };

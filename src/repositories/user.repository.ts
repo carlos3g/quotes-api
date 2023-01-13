@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 
 import { dataSource } from '~/database';
-import { User } from '~/entities';
+import { Quote, User } from '~/entities';
 import { IUserRepository } from '~/interfaces';
 import { QuoteRepository } from '~/repositories';
 import { slugify } from '~/utils';
@@ -78,6 +78,37 @@ class UserRepository implements IUserRepository {
     await this.userTypeormRepository.save(user);
 
     return true;
+  }
+
+  public async removeFavorite(userId: number, quoteId: number): Promise<boolean> {
+    const quote = await quoteRepository.findOne(quoteId);
+    const user = await this.userTypeormRepository.findOne({
+      where: { id: userId },
+      relations: { favorite_quotes: true },
+    });
+
+    if (!user || !quote) {
+      return false;
+    }
+
+    user.favorite_quotes = user.favorite_quotes.filter((q) => q.id !== quote.id);
+
+    await this.userTypeormRepository.save(user);
+
+    return true;
+  }
+
+  public async getFavoriteQuotes(userId: number): Promise<Quote[] | null> {
+    const user = await this.userTypeormRepository.findOne({
+      where: { id: userId },
+      relations: { favorite_quotes: true },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return user.favorite_quotes;
   }
 }
 

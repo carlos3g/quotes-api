@@ -94,8 +94,16 @@ routes.put(
 routes.post(
   '/quote/:id/favorite',
   middlewares.ensureAuthentication,
+  validators.favorite.checkSchema.store,
   middlewares.validation,
   favoriteController.store.bind(favoriteController)
+);
+routes.delete(
+  '/quote/:id/unfavorite',
+  middlewares.ensureAuthentication,
+  validators.favorite.checkSchema.delete,
+  middlewares.validation,
+  favoriteController.delete.bind(favoriteController)
 );
 routes.get(
   '/quotes',
