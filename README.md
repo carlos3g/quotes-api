@@ -14,9 +14,7 @@
 
 <div align="center">
 
-This is a rest api for quotes. Here you can do CRUD operations and filtering with quotes and author entities.
-
-![quotes-api-mer](https://user-images.githubusercontent.com/52337966/210654966-11a7cdea-a494-4977-916d-ebf7d7c508fe.png)
+This is a rest api for quotes. Users can login and favorite quotes. See [Features](#-features)
 
 </div>
 
@@ -26,6 +24,7 @@ This is a rest api for quotes. Here you can do CRUD operations and filtering wit
 - [How to run](#-how-to-run)
   - [With docker](#with-docker)
   - [Without docker](#without-docker)
+- [Database Model](#-database-model)
 - [Technologies](#-technologies)
 - [Documentation](#-documentation)
 - [How to contribute](#-how-to-contribute)
@@ -33,6 +32,9 @@ This is a rest api for quotes. Here you can do CRUD operations and filtering wit
 
 ## 💻 Features
 
+- Authentication
+- Favorite _quotes_
+- Create/Delete/Update _users_
 - Create/Delete/Update _authors_
 - Get one or all _authors_
 - Create/Delete/Update _quotes_
@@ -71,6 +73,12 @@ yarn db:dev:migrations
 # Runs seeders:
 yarn db:dev:seeders
 ```
+
+## Database model
+
+> ER Diagram was made using [draw.io](https://draw.io)
+
+![quotes-api-mer](https://user-images.githubusercontent.com/52337966/212559007-f09cc46a-d585-4412-8d2e-d75a1d1cc150.png)
 
 ## 🛠 Technologies
 
