@@ -24,6 +24,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-void': 0,
     'class-methods-use-this': 0,
+    '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/no-unused-vars': [
       0,
       {

@@ -1,1 +1,0 @@
-export { checkSchema } from './checkSchema';

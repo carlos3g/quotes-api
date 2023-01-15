@@ -1,8 +1,8 @@
 import { Seeder } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
 
-import { slugify } from '~/utils';
-import { Author, Quote } from '~/entities';
+import { slugify } from '~/shared/utils';
+import { Author, Quote } from '~/shared/entities';
 
 export default class BaseSeeder implements Seeder {
   public async run(dataSource: DataSource): Promise<void> {
