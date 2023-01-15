@@ -74,7 +74,7 @@ yarn db:dev:migrations
 yarn db:dev:seeders
 ```
 
-## Database model
+## 📝 Database model
 
 > ER Diagram was made using [draw.io](https://draw.io)
 
