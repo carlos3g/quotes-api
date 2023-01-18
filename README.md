@@ -6,8 +6,8 @@
     A rest api for quotes. Made with express.js and typeORM.
   </blockquote>
   <div id="badges">
-    <img src="https://img.shields.io/github/repo-size/carlos3g/expo-starter?color=4000FF" alt="repo-size" />
-    <img src="https://img.shields.io/github/issues-raw/carlos3g/expo-starter?color=4000FF" alt="issues" />
+    <img src="https://img.shields.io/github/repo-size/carlos3g/quotes-api?color=4000FF" alt="repo-size" />
+    <img src="https://img.shields.io/github/issues-raw/carlos3g/quotes-api?color=4000FF" alt="issues" />
     <img src="https://img.shields.io/badge/license-MIT-4000FF" alt="license" />
   </div>
 </div>
@@ -97,7 +97,7 @@ Documentation is served at route `/api-docs`. So just run the app and check it!
 
 ## 🤝 How to contribute
 
-- Is there any problem? Found a bug? Do you have any tips? Open an [issue](https://github.com/carlos3g/expo-starter/issues) describing it.
+- Is there any problem? Found a bug? Do you have any tips? Open an [issue](https://github.com/carlos3g/quotes-api/issues) describing it.
 
 - Want to contribute code? First read [this contribution guide](https://github.com/firstcontributions/first-contributions)
 
